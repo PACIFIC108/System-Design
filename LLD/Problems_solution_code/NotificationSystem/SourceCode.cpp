@@ -77,6 +77,7 @@ public:
 	Notification(string message, NotificationFactory* NF, User* user): message(message), NF(NF), user(user) {}
 	void createNotification() {
 		lock_guard<mutex> lock(mtx);
+		//we can use Despacher class to separate type creation of notification channel as it will more accurate for SRP
 		NotificationType* type = NF->create(message);
 		type->send(user);
 		delete type;
